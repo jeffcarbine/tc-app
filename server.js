@@ -4,7 +4,7 @@
 // get all the tools we need
 var express  = require('express');
 var app      = express();
-var port     = 80;
+var port     = 8080;
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
@@ -41,6 +41,23 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
+
+// update active order statuses
+/*var requestLoop = setInterval(function(){
+  request({
+      url: "http://www.google.com",
+      method: "GET",
+      timeout: 10000,
+      followRedirect: true,
+      maxRedirects: 10
+  },function(error, response, body){
+      if(!error && response.statusCode == 200){
+          console.log('sucess!');
+      }else{
+          console.log('error' + response.statusCode);
+      }
+  });
+}, 60000);*/
 
 // routes ======================================================================
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
